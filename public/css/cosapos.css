@@ -1,0 +1,485 @@
+:root {
+    --cosapos-navy: #0D1B2A;
+    --cosapos-navy-2: #173A6D;
+    --cosapos-blue: #1E3A8A;
+    --cosapos-blue-light: #3B82F6;
+
+    --cosapos-gray-900: #1F2937;
+    --cosapos-gray-700: #4B5563;
+    --cosapos-gray-500: #6B7280;
+    --cosapos-gray-300: #D1D5DB;
+    --cosapos-gray-200: #E5E7EB;
+    --cosapos-gray-100: #F3F4F6;
+    --cosapos-bg: #F8FAFC;
+    --cosapos-white: #FFFFFF;
+
+    --cosapos-success: #198754;
+    --cosapos-danger: #DC3545;
+    --cosapos-warning: #F59E0B;
+}
+
+body {
+    background: var(--cosapos-bg);
+    color: var(--cosapos-gray-900);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* NAVBAR */
+.navbar.bg-dark {
+    background: linear-gradient(
+        90deg,
+        var(--cosapos-navy),
+        var(--cosapos-navy-2)
+    ) !important;
+    box-shadow: 0 2px 12px rgba(13, 27, 42, 0.18);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.navbar .nav-link {
+    color: rgba(255, 255, 255, 0.78) !important;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.navbar .nav-link:hover {
+    color: var(--cosapos-white) !important;
+}
+
+/* TITULOS */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--cosapos-navy);
+}
+
+/* CARDS */
+.card {
+    border: 1px solid var(--cosapos-gray-200);
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(13, 27, 42, 0.06);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* BOTONES */
+.btn-primary,
+.btn-cosapos {
+    background: var(--cosapos-blue);
+    border-color: var(--cosapos-blue);
+    color: var(--cosapos-white);
+}
+
+.btn-primary:hover,
+.btn-cosapos:hover {
+    background: var(--cosapos-navy-2);
+    border-color: var(--cosapos-navy-2);
+    color: var(--cosapos-white);
+}
+
+.btn {
+    border-radius: 9px;
+    font-weight: 500;
+}
+
+/* FORMULARIOS */
+.form-control,
+.form-select {
+    border-radius: 9px;
+    border: 1px solid var(--cosapos-gray-300);
+    min-height: 44px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--cosapos-blue-light);
+    box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.15);
+}
+
+.form-label {
+    color: var(--cosapos-gray-700);
+    font-weight: 600;
+}
+
+/* TABLAS */
+.table {
+    background: var(--cosapos-white);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background: var(--cosapos-navy);
+    color: var(--cosapos-white);
+    border-color: var(--cosapos-navy);
+    font-weight: 600;
+}
+
+.table tbody tr:hover {
+    background: #F1F5F9;
+}
+
+/* ALERTAS */
+.alert {
+    border-radius: 10px;
+}
+
+/* =========================================================
+   LOGIN CORPORATIVO
+========================================================= */
+
+.login-shell {
+    min-height: calc(100vh - 3rem);
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    background: var(--cosapos-white);
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(13, 27, 42, 0.12);
+}
+
+/* Panel corporativo izquierdo */
+
+.login-brand-side {
+    position: relative;
+    overflow: hidden;
+    padding: 4.5rem;
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(59, 130, 246, 0.25),
+            transparent 34%
+        ),
+        linear-gradient(
+            145deg,
+            #081525 0%,
+            #0D1B2A 45%,
+            #173A6D 100%
+        );
+}
+
+.login-brand-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-mark {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.brand-mark h1 {
+    color: white;
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.brand-mark p {
+    margin: 0.15rem 0 0;
+    color: #B9C7DC;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.76rem;
+    font-weight: 600;
+}
+
+/* Símbolo provisional del logo */
+
+.brand-symbol {
+    width: 54px;
+    height: 54px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+
+    border-left: 4px solid #FFFFFF;
+    border-bottom: 4px solid #3B82F6;
+    padding: 7px;
+}
+
+.brand-symbol span {
+    display: block;
+    width: 8px;
+    background: white;
+}
+
+.brand-symbol span:nth-child(1) {
+    height: 18px;
+}
+
+.brand-symbol span:nth-child(2) {
+    height: 30px;
+    background: #3B82F6;
+}
+
+.brand-symbol span:nth-child(3) {
+    height: 40px;
+}
+
+/* Texto principal */
+
+.brand-copy {
+    max-width: 590px;
+    margin-top: auto;
+    margin-bottom: 3rem;
+}
+
+.brand-kicker {
+    display: inline-block;
+    color: #89B7FF;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    margin-bottom: 1.1rem;
+}
+
+.brand-copy h2 {
+    color: white;
+    font-size: clamp(2rem, 3vw, 3.3rem);
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 1.3rem;
+}
+
+.brand-copy p {
+    color: #C6D1E1;
+    line-height: 1.8;
+    font-size: 1.02rem;
+    max-width: 530px;
+}
+
+/* Características */
+
+.brand-features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.brand-feature {
+    display: flex;
+    gap: 0.8rem;
+    padding-top: 1.1rem;
+
+    border-top: 1px solid rgba(255,255,255,0.16);
+}
+
+.feature-icon {
+    color: #69A5FF;
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.brand-feature strong {
+    display: block;
+    color: white;
+    font-size: 0.88rem;
+    margin-bottom: 0.15rem;
+}
+
+.brand-feature span {
+    display: block;
+    color: #9FB0C7;
+    font-size: 0.75rem;
+    line-height: 1.35;
+}
+
+
+/* Trama tipo plano de ingeniería */
+
+.engineering-grid {
+    position: absolute;
+    inset: 0;
+
+    opacity: 0.055;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.7) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.7) 1px,
+            transparent 1px
+        );
+
+    background-size: 42px 42px;
+
+    transform: rotate(-4deg) scale(1.12);
+}
+
+
+/* Panel derecho */
+
+.login-form-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 4rem 5rem;
+
+    background:
+        linear-gradient(
+            180deg,
+            #FFFFFF 0%,
+            #F8FAFC 100%
+        );
+}
+
+.login-form-wrapper {
+    width: 100%;
+    max-width: 440px;
+}
+
+.login-mobile-brand {
+    display: none;
+}
+
+.login-overline {
+    color: var(--cosapos-blue);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 1.7px;
+    text-transform: uppercase;
+}
+
+.login-title {
+    margin-top: 0.7rem;
+    margin-bottom: 0.5rem;
+
+    font-size: 2.2rem;
+    font-weight: 700;
+
+    color: var(--cosapos-navy);
+}
+
+.login-description {
+    color: var(--cosapos-gray-500);
+    margin-bottom: 2.2rem;
+}
+
+
+/* Inputs corporativos */
+
+.cosapos-input {
+    position: relative;
+}
+
+.cosapos-input .input-icon {
+    position: absolute;
+
+    left: 16px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    z-index: 2;
+
+    color: #8A96A8;
+    font-weight: 600;
+}
+
+.cosapos-input .form-control {
+    padding-left: 46px;
+
+    min-height: 52px;
+
+    background: #FFFFFF;
+
+    border: 1px solid #D8DEE8;
+
+    border-radius: 11px;
+}
+
+.cosapos-input .form-control::placeholder {
+    color: #AAB2BF;
+}
+
+.cosapos-input .form-control:focus {
+    background: white;
+}
+
+
+/* Botón */
+
+.btn-login {
+    min-height: 52px;
+
+    font-size: 0.96rem;
+
+    border-radius: 11px;
+
+    box-shadow:
+        0 8px 18px rgba(30, 58, 138, 0.18);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+.btn-login:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 12px 24px rgba(30, 58, 138, 0.22);
+}
+
+
+/* Pie */
+
+.login-footer {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+
+    margin-top: 2rem;
+
+    color: #9AA4B2;
+    font-size: 0.75rem;
+}
+
+
+/* Responsive */
+
+@media (max-width: 991px) {
+
+    .login-shell {
+        display: block;
+    }
+
+    .login-brand-side {
+        display: none;
+    }
+
+    .login-form-side {
+        min-height: calc(100vh - 3rem);
+        padding: 2rem;
+    }
+
+    .login-mobile-brand {
+        display: block;
+
+        color: var(--cosapos-navy);
+        font-size: 1.25rem;
+        font-weight: 700;
+
+        margin-bottom: 2.2rem;
+    }
+}
