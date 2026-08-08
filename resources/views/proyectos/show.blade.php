@@ -36,7 +36,7 @@
                     <div class="col"><strong>Margen:</strong> {{ number_format($proyecto->resultadoOperativo->margen * 100, 2) }}%</div>
                 </div>
             @else
-                <p class="text-muted mb-0">Aún no se ha generado. Requiere venta contractual y presupuesto base registrados.</p>
+                <p class="text-muted mb-0">Aún no se ha generado. Se requiere registrar la venta contractual y el presupuesto base.</p>
             @endif
         </div>
     </div>

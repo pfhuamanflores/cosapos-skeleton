@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('titulo', 'Nuevo Proyecto')
 @section('contenido')
-    <h1 class="h4 mb-4">Registrar Proyecto</h1>
+    <h1 class="h4 mb-4">Registrar los Proyectos</h1>
     <form method="POST" action="{{ route('proyectos.store') }}" class="card card-body shadow-sm">
         @csrf
         <div class="row g-3">
@@ -14,7 +14,7 @@
                 <input type="text" name="nombre" value="{{ old('nombre') }}" class="form-control" required>
             </div>
             <div class="col-md-6">
-                <label class="form-label">Cliente</label>
+                <label class="form-label">Nombre del Cliente</label>
                 <input type="text" name="cliente" value="{{ old('cliente') }}" class="form-control" required>
             </div>
             <div class="col-md-6">

@@ -22,7 +22,7 @@
                 Gestión
             </span>
             <h5 class="dashboard-panel-title">
-                Lista de proyectos
+                Lista de los proyectos
             </h5>
         </div>
         <a
