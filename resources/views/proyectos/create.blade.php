@@ -23,7 +23,15 @@
             </div>
             <div class="col-md-4">
                 <label class="form-label">Tipo de contrato</label>
-                <input type="text" name="tipo_contrato" value="{{ old('tipo_contrato') }}" class="form-control">
+                <select name="tipo_contrato" class="form-select" required>
+                    <option value="" disabled selected>
+                        Seleccione un tipo de contrato
+                    </option>
+                    <option value="Suma Alzada">Suma Alzada</option>
+                    <option value="Precios Unitarios">Precios Unitarios</option>
+                    <option value="Administración Delegada">Administración Delegada</option>
+                    <option value="EPC">EPC (Ingeniería, Procura y Construcción)</option>
+                </select>
             </div>
             <div class="col-md-4">
                 <label class="form-label">Fecha de inicio</label>
@@ -35,14 +43,34 @@
             </div>
             <div class="col-md-6">
                 <label class="form-label">Moneda</label>
-                <select name="tipo_moneda" class="form-select">
-                    <option value="PEN" selected>Soles (PEN)</option>
-                    <option value="USD">Dólares (USD)</option>
+                <select name="tipo_moneda" class="form-select" required>
+                    <option value="" disabled selected>
+                        Seleccione una moneda
+                    </option>
+                    <option value="PEN">
+                        Soles (PEN)
+                    </option>
+                    <option value="USD">
+                        Dólares estadounidenses (USD)
+                    </option>
                 </select>
             </div>
             <div class="col-md-6">
                 <label class="form-label">Unidad de negocio</label>
-                <input type="text" name="unidad_negocio" value="{{ old('unidad_negocio') }}" class="form-control">
+                <select name="unidad_negocio" class="form-select" required>
+                    <option value="" disabled selected>
+                        Seleccione una unidad de negocio
+                    </option>
+                    <option value="Plantas Industriales">
+                        Plantas Industriales
+                    </option>
+                    <option value="Infraestructura">
+                        Infraestructura
+                    </option>
+                    <option value="Edificaciones">
+                        Edificaciones
+                    </option>
+                </select>
             </div>
         </div>
         <div class="mt-4 d-flex gap-2">
