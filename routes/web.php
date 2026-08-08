@@ -12,6 +12,7 @@ use App\Http\Controllers\ResumenResultadoController;
 use App\Http\Controllers\ReporteProyectoController;
 use App\Http\Controllers\SolicitudRecursoController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\VentaContractualController;
 use Illuminate\Support\Facades\Route;
 
 // CUS01 - Autenticar Usuario
@@ -35,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::post('proyectos/{proyecto}/fases', [PlanFaseController::class, 'store'])->name('proyectos.fases.store');
     Route::put('proyectos/{proyecto}/fases/{fase}', [PlanFaseController::class, 'update'])->name('proyectos.fases.update');
     Route::delete('proyectos/{proyecto}/fases/{fase}', [PlanFaseController::class, 'destroy'])->name('proyectos.fases.destroy');
+
+    Route::post('proyectos/{proyecto}/venta-contractual', [VentaContractualController::class, 'store'])->name('proyectos.venta.store');
 
     // CUS06 - Registrar Presupuesto Base / CUS07 - Asociar Partidas a Fases
     Route::post('proyectos/{proyecto}/presupuesto', [PresupuestoController::class, 'store'])->name('proyectos.presupuesto.store');

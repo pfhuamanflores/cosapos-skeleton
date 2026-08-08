@@ -45,12 +45,33 @@
         <div class="card-header">Venta Contractual</div>
         <div class="card-body">
             @if($proyecto->ventaContractual)
-                <p class="mb-0">Monto: {{ number_format($proyecto->ventaContractual->monto_contrato, 2) }} {{ $proyecto->tipo_moneda }}
+                <p class="mb-2">Monto: {{ number_format($proyecto->ventaContractual->monto_contrato, 2) }} {{ $proyecto->tipo_moneda }}
                     — Firma: {{ $proyecto->ventaContractual->fecha_firma->format('d/m/Y') }}
                     — Estado: {{ $proyecto->ventaContractual->estado_contrato }}</p>
             @else
-                <p class="text-muted mb-0">No registrada aún.</p>
+                <p class="text-muted mb-2">No registrada aún. Es requisito para poder generar el Resultado Operativo Base.</p>
             @endif
+            <form method="POST" action="{{ route('proyectos.venta.store', $proyecto) }}" class="row g-2">
+                @csrf
+                <div class="col-md-3">
+                    <input type="number" step="0.01" name="monto_contrato" class="form-control form-control-sm"
+                           placeholder="Monto del contrato" value="{{ $proyecto->ventaContractual?->monto_contrato ?? '' }}" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="date" name="fecha_firma" class="form-control form-control-sm"
+                           value="{{ $proyecto->ventaContractual?->fecha_firma?->format('Y-m-d') ?? '' }}" required>
+                </div>
+                <div class="col-md-3">
+                    <select name="estado_contrato" class="form-select form-select-sm">
+                        @foreach(['Vigente', 'Suspendido', 'Cerrado'] as $estado)
+                            <option value="{{ $estado }}" @selected(($proyecto->ventaContractual?->estado_contrato ?? 'Vigente') === $estado)>{{ $estado }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-sm btn-primary w-100">{{ $proyecto->ventaContractual ? 'Actualizar' : 'Registrar' }}</button>
+                </div>
+            </form>
         </div>
     </div>
 

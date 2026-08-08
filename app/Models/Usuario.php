@@ -27,12 +27,6 @@ class Usuario extends Authenticatable
         ];
     }
 
-    // CI Login autentica por "correo" en vez del "email" por defecto de Laravel
-    public function getAuthIdentifierName(): string
-    {
-        return 'correo';
-    }
-
     public function rol(): BelongsTo
     {
         return $this->belongsTo(Rol::class);
