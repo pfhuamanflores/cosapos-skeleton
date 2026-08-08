@@ -15,7 +15,7 @@
                 <input type="text" name="nombre" value="{{ old('nombre', $proyecto->nombre) }}" class="form-control" required>
             </div>
             <div class="col-md-6">
-                <label class="form-label">Cliente</label>
+                <label class="form-label">Nombre del Cliente</label>
                 <input type="text" name="cliente" value="{{ old('cliente', $proyecto->cliente) }}" class="form-control" required>
             </div>
             <div class="col-md-6">
