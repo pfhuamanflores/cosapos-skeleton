@@ -2,7 +2,7 @@
 @section('titulo', 'Editar Proyecto')
 @section('contenido')
     <h1 class="h4 mb-4">Editar Proyecto — {{ $proyecto->codigo }}</h1>
-    <form method="POST" action="{{ route('proyectos.update', $proyecto) }}" class="card card-body shadow-sm">
+    <form method="POST" action="{{ route('proyectos.update', $proyecto) }}" enctype="multipart/form-data" class="card card-body shadow-sm">
         @csrf
         @method('PUT')
         <div class="row g-3">
@@ -45,6 +45,11 @@
             <div class="col-md-6">
                 <label class="form-label">Unidad de negocio</label>
                 <input type="text" name="unidad_negocio" value="{{ old('unidad_negocio', $proyecto->unidad_negocio) }}" class="form-control">
+            </div>
+            <div class="col-12">
+                <label class="form-label">Reemplazar imagen</label>
+                <input type="file" name="imagen" class="form-control" accept="image/jpeg,image/png,image/webp">
+                <div class="form-text">Déjalo vacío para conservar la imagen actual. JPG, PNG o WebP; máximo 2 MB.</div>
             </div>
         </div>
         <div class="mt-4 d-flex gap-2">

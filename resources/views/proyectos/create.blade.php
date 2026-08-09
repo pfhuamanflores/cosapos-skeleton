@@ -2,7 +2,7 @@
 @section('titulo', 'Nuevo Proyecto')
 @section('contenido')
     <h1 class="h4 mb-4">Registrar Proyecto</h1>
-    <form method="POST" action="{{ route('proyectos.store') }}" class="card card-body shadow-sm">
+    <form method="POST" action="{{ route('proyectos.store') }}" enctype="multipart/form-data" class="card card-body shadow-sm">
         @csrf
         <div class="row g-3">
             <div class="col-md-4">
@@ -71,6 +71,11 @@
                         Edificaciones
                     </option>
                 </select>
+            </div>
+            <div class="col-12">
+                <label class="form-label">Imagen del proyecto</label>
+                <input type="file" name="imagen" class="form-control" accept="image/jpeg,image/png,image/webp">
+                <div class="form-text">JPG, PNG o WebP; máximo 2 MB.</div>
             </div>
         </div>
         <div class="mt-4 d-flex gap-2">

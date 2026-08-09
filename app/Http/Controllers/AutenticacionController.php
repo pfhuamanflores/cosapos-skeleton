@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegistroRequest;
+use App\Models\Rol;
+use App\Models\Usuario;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +20,25 @@ class AutenticacionController extends Controller
     public function mostrarLogin(): View
     {
         return view('auth.login');
+    }
+
+    public function mostrarRegistro(): View
+    {
+        return view('auth.registro');
+    }
+
+    public function registrar(RegistroRequest $request): RedirectResponse
+    {
+        $rol = Rol::where('nombre', Rol::SOLICITANTE_RECURSOS)->firstOrFail();
+        $usuario = Usuario::create($request->safe()->except('password_confirmation') + [
+            'rol_id' => $rol->id,
+            'activo' => true,
+        ]);
+
+        Auth::login($usuario);
+        $request->session()->regenerate();
+
+        return redirect()->route('portal.index')->with('exito', 'Cuenta creada correctamente.');
     }
 
     public function login(LoginRequest $request): RedirectResponse
@@ -36,7 +58,11 @@ class AutenticacionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard'));
+        $destino = Auth::user()->tieneRol(Rol::ADMIN_SISTEMA)
+            ? route('dashboard')
+            : route('portal.index');
+
+        return redirect()->intended($destino);
     }
 
     public function logout(Request $request): RedirectResponse
@@ -45,6 +71,6 @@ class AutenticacionController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()->route('portal.index');
     }
 }

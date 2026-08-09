@@ -10,7 +10,7 @@ class ProyectoRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return $this->user()->tieneRol(Rol::ESPECIALISTA_PRESUPUESTOS, Rol::ADMIN_SISTEMA);
+        return $this->user()->tieneRol(Rol::ADMIN_SISTEMA);
     }
 
     public function rules(): array
@@ -27,6 +27,7 @@ class ProyectoRequest extends FormRequest
             'fecha_termino' => ['nullable', 'date', 'after_or_equal:fecha_inicio'],
             'tipo_moneda' => ['required', 'string', 'max:10'],
             'unidad_negocio' => ['nullable', 'string', 'max:100'],
+            'imagen' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
         ];
     }
 }

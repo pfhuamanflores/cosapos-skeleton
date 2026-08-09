@@ -6,6 +6,7 @@ use App\Http\Requests\ProyectoRequest;
 use App\Models\Proyecto;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 /**
@@ -16,7 +17,7 @@ class ProyectoController extends Controller
 {
     public function index(): View
     {
-        $proyectos = Proyecto::with(['resultadoOperativo', 'creador'])
+        $proyectos = Proyecto::with(['resultadoOperativo', 'creador', 'resultadosOperativosMensuales' => fn ($q) => $q->latest('periodo')])
             ->when(request('buscar'), fn ($q) => $q->where('nombre', 'like', '%'.request('buscar').'%')
                 ->orWhere('codigo', 'like', '%'.request('buscar').'%'))
             ->latest()
@@ -33,7 +34,11 @@ class ProyectoController extends Controller
 
     public function store(ProyectoRequest $request): RedirectResponse
     {
-        $proyecto = Proyecto::create($request->validated() + ['creado_por' => Auth::id()]);
+        $datos = $request->validated();
+        if ($request->hasFile('imagen')) {
+            $datos['imagen'] = $request->file('imagen')->store('proyectos', 'public');
+        }
+        $proyecto = Proyecto::create($datos + ['creado_por' => Auth::id()]);
 
         return redirect()->route('proyectos.show', $proyecto)->with('exito', 'Proyecto registrado correctamente.');
     }
@@ -55,8 +60,27 @@ class ProyectoController extends Controller
 
     public function update(ProyectoRequest $request, Proyecto $proyecto): RedirectResponse
     {
-        $proyecto->update($request->validated());
+        $datos = $request->validated();
+        if ($request->hasFile('imagen')) {
+            if ($proyecto->imagen) {
+                Storage::disk('public')->delete($proyecto->imagen);
+            }
+            $datos['imagen'] = $request->file('imagen')->store('proyectos', 'public');
+        }
+        $proyecto->update($datos);
 
         return redirect()->route('proyectos.show', $proyecto)->with('exito', 'Proyecto actualizado correctamente.');
+    }
+
+    public function destroy(Proyecto $proyecto): RedirectResponse
+    {
+        $this->authorize('delete', $proyecto);
+
+        if ($proyecto->imagen) {
+            Storage::disk('public')->delete($proyecto->imagen);
+        }
+        $proyecto->delete();
+
+        return redirect()->route('proyectos.index')->with('exito', 'Proyecto eliminado correctamente.');
     }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\ConsolidadoCorporativoController;
 use App\Http\Controllers\CostoRealController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PlanFaseController;
+use App\Http\Controllers\PortalController;
 use App\Http\Controllers\PresupuestoController;
 use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\ResultadoOperativoController;
@@ -16,21 +17,29 @@ use App\Http\Controllers\VentaContractualController;
 use Illuminate\Support\Facades\Route;
 
 // CUS01 - Autenticar Usuario
+Route::get('/', [PortalController::class, 'index'])->name('portal.index');
+Route::get('/proyectos-publicos/{proyecto}', [PortalController::class, 'show'])->name('portal.show');
+
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AutenticacionController::class, 'mostrarLogin'])->name('login');
     Route::post('/login', [AutenticacionController::class, 'login'])->name('login.store');
+    Route::get('/registro', [AutenticacionController::class, 'mostrarRegistro'])->name('registro');
+    Route::post('/registro', [AutenticacionController::class, 'registrar'])->name('registro.store');
 });
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', [AutenticacionController::class, 'logout'])->name('logout');
 
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('administrador')->name('dashboard');
 
     // CUS02-03 - Gestionar Usuarios / Asignar Rol
-    Route::resource('usuarios', UsuarioController::class)->except(['show']);
+    Route::resource('usuarios', UsuarioController::class)->except(['show'])->middleware('administrador');
 
     // CUS04 - Registrar Proyecto
-    Route::resource('proyectos', ProyectoController::class)->except(['destroy']);
+    Route::resource('proyectos', ProyectoController::class)
+        ->only(['create', 'store', 'edit', 'update', 'destroy'])
+        ->middleware('administrador');
+    Route::resource('proyectos', ProyectoController::class)->only(['index', 'show']);
 
     // CUS05 - Registrar Plan de Fases del Proyecto
     Route::post('proyectos/{proyecto}/fases', [PlanFaseController::class, 'store'])->name('proyectos.fases.store');

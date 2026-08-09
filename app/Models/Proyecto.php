@@ -12,7 +12,7 @@ class Proyecto extends Model
 {
     protected $fillable = [
         'codigo', 'nombre', 'cliente', 'ubicacion', 'tipo_contrato',
-        'fecha_inicio', 'fecha_termino', 'tipo_moneda', 'unidad_negocio', 'creado_por',
+        'fecha_inicio', 'fecha_termino', 'tipo_moneda', 'unidad_negocio', 'imagen', 'creado_por',
     ];
 
     protected function casts(): array

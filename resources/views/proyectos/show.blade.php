@@ -9,7 +9,17 @@
         <div class="d-flex gap-2">
             <a href="{{ route('proyectos.resumen', $proyecto) }}" class="btn btn-outline-primary btn-sm">Resumen ejecutivo</a>
             <a href="{{ route('proyectos.solicitudes.index', $proyecto) }}" class="btn btn-outline-secondary btn-sm">Solicitudes de recursos</a>
-            <a href="{{ route('proyectos.edit', $proyecto) }}" class="btn btn-outline-secondary btn-sm">Editar</a>
+            @can('update', $proyecto)
+                <a href="{{ route('proyectos.edit', $proyecto) }}" class="btn btn-outline-secondary btn-sm">Editar</a>
+            @endcan
+            @can('delete', $proyecto)
+                <form method="POST" action="{{ route('proyectos.destroy', $proyecto) }}"
+                      onsubmit="return confirm('¿Está seguro de eliminar este proyecto? Esta acción no se puede deshacer.')">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-outline-danger btn-sm">Eliminar</button>
+                </form>
+            @endcan
         </div>
     </div>
 
